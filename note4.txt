@@ -1,0 +1,18 @@
+eqn1 = x''[t] + 2\[Delta] x'[t] + \[Omega]0^2x[t] ==0.1 * Sin[  \[Omega]0*t];
+eqn2 = x''[t] + 2\[Delta] x'[t] + \[Omega]0^2x[t] ==0.1 * Sin[0.5 *  \[Omega]0 *t];
+eqn3 = x''[t] + 2\[Delta] x'[t] + \[Omega]0^2x[t] ==0.1 * Sin[2 *  \[Omega]0*t];
+
+
+\[Delta] = 0.072;
+\[Omega]0 =15.5/15;
+
+tmax =30 * \[Pi]/\[Omega]0;
+wp1 := x[0] == 0;
+wp2 := x'[0] ==0;
+
+sol1 = NDSolve[{eqn1, wp1, wp2}, x, {t, 0, tmax}];
+sol2 = NDSolve[{eqn2, wp1, wp2}, x, {t, 0, tmax}];
+sol3 = NDSolve[{eqn3, wp1, wp2}, x, {t, 0, tmax}];
+Plot[{Evaluate[x[t] /.sol1],0.1 * Sin[\[Omega]0*t]}, {t, 0,tmax}, PlotRange->All, PlotLegends->{"Oscylacja bez wymuszenia", "Oscylacja z wymuszeniem"}]
+Plot[{Evaluate[x[t] /.sol2],0.1 * Sin[0.5 *\[Omega]0*t]}, {t, 0,tmax}, PlotRange->All, PlotLegends->{"Oscylacja bez wymuszenia", "Oscylacja z wymuszeniem"}]
+Plot[{Evaluate[x[t] /.sol3],0.1 * Sin[2 *\[Omega]0*t]}, {t, 0,tmax}, PlotRange->All, PlotLegends->{"Oscylacja bez wymuszenia", "Oscylacja z wymuszeniem"}]

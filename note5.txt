@@ -1,0 +1,16 @@
+\[Omega] = 1;
+g = 9.8;
+l = 0.715;
+eqn1 :=y''[t]+(g/l)*Sin[y[t]]==0;
+eqn2 :=y''[t]+(g/l)*x[t]==0;
+o=0.072;
+Manipulate[
+tmax=2*2Pi/\[Omega];
+wp11:=y[0]==o;
+wp12:=y'[0]==0;
+wp21:=x[0]==o;
+wp22:=x'[0]==0;
+sol1=NDSolve[{eqn1,wp11,wp12},y,{t,0,tmax}];
+sol2=NDSolve[{eqn2,wp21,wp22},x,{t,0,tmax}];
+
+Plot[{Evaluate[y[t] /.sol1], Evaluate[x[t]/.sol2]},{t,0,tmax}, PlotRange->All],{o,0.1,Pi}]
